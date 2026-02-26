@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mega_bg">
+
+    <!-- 상단 노랑 헤더 -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="@color/mega_yellow"
+        app:title="Recipe Book"
+        app:titleTextColor="@color/mega_black"
+        app:navigationIcon="@drawable/baseline_coffee_24"
+        app:navigationIconTint="@color/mega_black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 내용은 스크롤 (세로/작은 화면에서도 안 깨짐) -->
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <!-- 중앙 컨테이너: 태블릿 가로에서 너무 벌어지지 않게 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="920dp">
+
+                <!-- 타이틀 -->
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="초성 선택"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/mega_black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <!-- 초성 버튼 영역 (자동 줄바꿈) -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/choseongBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <androidx.constraintlayout.helper.widget.Flow
+                        android:id="@+id/flowChosung"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                    app:flow_wrapMode="aligned"
+                    app:flow_horizontalAlign="start"
+                    app:flow_firstHorizontalStyle="packed"
+                    app:flow_lastHorizontalStyle="packed"
+
+                    app:flow_horizontalGap="14dp"
+                    app:flow_verticalGap="14dp"
+                    app:flow_maxElementsWrap="7"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- 안내 -->
+                <TextView
+                    android:id="@+id/tvHint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="• 초성을 눌러 해당 메뉴 목록을 확인하세요."
+                    android:textColor="@color/mega_gray_text"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toBottomOf="@id/choseongBox"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <!-- 아래 여백(FAB 겹침 방지) -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvHint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- 레시피 추가 FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="22dp"
+        android:src="@drawable/baseline_add_24"
+        android:tint="@color/mega_black"
+        app:backgroundTint="@color/mega_yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
