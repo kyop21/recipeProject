@@ -77,15 +77,28 @@ class ChosungListActivity : AppCompatActivity() {
 
         val dao = AppDatabase.getInstance(this).recipeDao()
 
+        // --- 여기서부터 대체 코드 시작 ---
+        // 1. 넘어온 초성(chosung 변수)에 매칭되는 쌍자음을 찾아 배열(List)로 묶어줍니다.
+        val searchTargets = when (chosung) {
+            "ㄱ" -> listOf("ㄱ", "ㄲ")
+            "ㄷ" -> listOf("ㄷ", "ㄸ")
+            "ㅂ" -> listOf("ㅂ", "ㅃ")
+            "ㅅ" -> listOf("ㅅ", "ㅆ")
+            "ㅈ" -> listOf("ㅈ", "ㅉ")
+            else -> listOf(chosung) // 쌍자음이 없는 글자는 자기 자신만 배열에 넣음
+        }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                dao.observeByChosung(chosung).collect { list ->
+                // 2. 아까 RecipeDao.kt에서 수정한 새 함수 'observeByChosungs'를 호출하고 searchTargets를 넘깁니다.
+                dao.observeByChosungs(searchTargets).collect { list ->
                     adapter.submitList(list)
                     // 선택모드가 자동 해제되면 메뉴도 숨김
                     if (!adapter.selectionMode) setDeleteMenu(false)
                 }
             }
         }
+        // --- 여기까지 ---
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
