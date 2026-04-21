@@ -18,8 +18,11 @@ interface RecipeDao {
     @Upsert
     suspend fun upsertAll(items: List<RecipeEntity>)
 
-    @Query("SELECT * FROM recipes WHERE chosung = :chosung ORDER BY name ASC")
-    fun observeByChosung(chosung: String): Flow<List<RecipeEntity>>
+    //@Query("SELECT * FROM recipes WHERE chosung = :chosung ORDER BY name ASC")
+    //fun observeByChosung(chosung: String): Flow<List<RecipeEntity>>
+    // 배열 안에 있는 모든 초성을 검색하도록 IN 구문으로 수정
+    @Query("SELECT * FROM recipes WHERE chosung IN (:chosungs) ORDER BY name ASC")
+    fun observeByChosungs(chosungs: List<String>): Flow<List<RecipeEntity>>
 
     @Query("SELECT * FROM recipes WHERE id = :id LIMIT 1")
     suspend fun getById(id: Long): RecipeEntity?
