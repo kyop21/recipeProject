@@ -1,0 +1,33 @@
+name: Build Android APK
+
+# main 브랜치에 커밋(Push)될 때마다 자동으로 실행되게 합니다.
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Debug APK (컴파일러 실행)
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK (만들어진 APK 저장하기)
+      uses: actions/upload-artifact@v4
+      with:
+        name: recipe-app-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
