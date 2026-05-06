@@ -1,5 +1,6 @@
 package com.example.recipeproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -129,6 +130,13 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_home -> {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                startActivity(intent)
+                true
+            }
             R.id.action_edit -> {
                 recipe?.let { showEditRecipeDialog(it) }
                 true

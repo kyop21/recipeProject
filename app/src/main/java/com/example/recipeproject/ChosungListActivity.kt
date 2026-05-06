@@ -119,6 +119,13 @@ class ChosungListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_home -> {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                startActivity(intent)
+                true
+            }
             R.id.action_delete -> {
                 val ids = adapter.getSelectedIds()
                 if (ids.isEmpty()) return true
