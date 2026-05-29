@@ -141,10 +141,6 @@ class RecipeDetailActivity : AppCompatActivity() {
                 recipe?.let { showEditRecipeDialog(it) }
                 true
             }
-            R.id.action_delete -> {
-                recipe?.let { confirmDelete(it) }
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -237,6 +233,9 @@ class RecipeDetailActivity : AppCompatActivity() {
         val etSteps = v.findViewById<TextInputEditText>(R.id.etSteps)
         val etToppings = v.findViewById<TextInputEditText>(R.id.etToppings)
 
+        val btnDelete = v.findViewById<View>(R.id.btnDelete)
+        btnDelete.visibility = View.VISIBLE
+
         etName.setText(current.name)
 
         var iceSteps = current.iceSteps
@@ -284,9 +283,14 @@ class RecipeDetailActivity : AppCompatActivity() {
             .create()
 
         dialog.setCanceledOnTouchOutside(false)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
 
         v.findViewById<View>(R.id.btnCancel).setOnClickListener { dialog.dismiss() }
+
+        btnDelete.setOnClickListener {
+            dialog.dismiss()
+            confirmDelete(current)
+        }
 
         v.findViewById<View>(R.id.btnSave).setOnClickListener {
             saveTab(tab)
@@ -333,8 +337,8 @@ class RecipeDetailActivity : AppCompatActivity() {
     // -------------------------
     private fun confirmDelete(current: RecipeEntity) {
         MaterialAlertDialogBuilder(this)
-            .setTitle("삭제할까?")
-            .setMessage("‘${current.name}’ 레시피를 삭제하면 복구할 수 없어.")
+            .setTitle("삭제하시겠습니까?")
+            .setMessage("‘${current.name}’ 레시피를 삭제하면 복구할 수 없습니다.")
             .setNegativeButton("취소", null)
             .setPositiveButton("삭제") { _, _ ->
                 lifecycleScope.launch(Dispatchers.IO) {

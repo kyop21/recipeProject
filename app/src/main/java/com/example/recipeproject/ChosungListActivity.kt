@@ -131,8 +131,8 @@ class ChosungListActivity : AppCompatActivity() {
                 if (ids.isEmpty()) return true
 
                 MaterialAlertDialogBuilder(this)
-                    .setTitle("삭제할까?")
-                    .setMessage("${ids.size}개 레시피를 삭제하면 복구할 수 없어.")
+                    .setTitle("삭제하시겠습니까?")
+                    .setMessage("${ids.size}개의 레시피를 삭제하면 복구할 수 없습니다.")
                     .setNegativeButton("취소", null)
                     .setPositiveButton("삭제") { _, _ ->
                         lifecycleScope.launch(Dispatchers.IO) {

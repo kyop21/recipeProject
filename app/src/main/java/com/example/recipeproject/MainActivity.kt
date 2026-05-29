@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity() {
             .create()
 
         dialog.setCanceledOnTouchOutside(false)
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
 
         v.findViewById<View>(R.id.btnCancel).setOnClickListener { dialog.dismiss() }
 

@@ -5,15 +5,12 @@
     <item
         android:id="@+id/action_home"
         android:title="홈"
+        android:icon="@drawable/ic_home"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_edit"
         android:title="수정"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_delete"
-        android:title="삭제"
+        android:icon="@drawable/ic_edit"
         app:showAsAction="always" />
 </menu>
