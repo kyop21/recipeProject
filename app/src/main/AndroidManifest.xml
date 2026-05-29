@@ -14,7 +14,8 @@
         tools:targetApi="31">
         <activity
             android:name=".RecipeDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ChosungListActivity"
             android:exported="false" />
