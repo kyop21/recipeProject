@@ -46,4 +46,7 @@ interface RecipeDao {
 
     @Query("DELETE FROM recipes WHERE id IN (:ids)")
     suspend fun deleteByIds(ids: List<Long>)
+
+    @Query("DELETE FROM recipes")
+    suspend fun deleteAll()
 }

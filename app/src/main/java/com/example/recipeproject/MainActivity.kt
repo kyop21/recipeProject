@@ -301,6 +301,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (items.isNotEmpty()) {
+                dao.deleteAll()
                 dao.upsertAll(items)
             }
 
