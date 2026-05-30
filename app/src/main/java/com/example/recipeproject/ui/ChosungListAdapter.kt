@@ -44,6 +44,15 @@ class ChosungListAdapter(
             else -> "내용 없음"
         }
 
+        // ✅ 카테고리별 테마 색상 적용
+        val category = com.example.recipeproject.util.CategoryThemeResolver.resolve(item)
+        val cardView = holder.itemView as? androidx.cardview.widget.CardView
+        cardView?.setCardBackgroundColor(android.graphics.Color.parseColor(category.cardColorHex))
+        holder.tvBadge.backgroundTintList = android.content.res.ColorStateList.valueOf(
+            android.graphics.Color.parseColor(category.badgeColorHex)
+        )
+
+
         // ✅ 선택 UI (간단 표시)
         val selected = selectedIds.contains(item.id)
         holder.itemView.alpha = if (selected) 0.6f else 1.0f
