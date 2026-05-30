@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_home"
-        android:title="홈"
-        android:icon="@drawable/ic_home"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/action_edit"
         android:title="수정"
         android:icon="@drawable/ic_edit"

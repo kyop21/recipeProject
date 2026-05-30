@@ -52,6 +52,7 @@ class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var tvSteps: android.widget.TextView
     private lateinit var tvToppings: android.widget.TextView
     private lateinit var etMemo: TextInputEditText
+    private lateinit var btnGoHome: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +69,13 @@ class RecipeDetailActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener { finish() }
+
+        btnGoHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }
+            startActivity(intent)
+        }
 
         // ✅ 탭 전환 시: (1) 현재 탭 메모 저장 (2) 새 탭 메모 로드 (3) steps/toppings 렌더
         toggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
@@ -130,13 +138,6 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_home -> {
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                }
-                startActivity(intent)
-                true
-            }
             R.id.action_edit -> {
                 recipe?.let { showEditRecipeDialog(it) }
                 true
@@ -154,6 +155,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         tvSteps = findViewById(R.id.tvSteps)
         tvToppings = findViewById(R.id.tvToppings)
         etMemo = findViewById(R.id.etMemo)
+        btnGoHome = findViewById(R.id.btnGoHome)
     }
 
     private fun loadRecipe(id: Long) {
